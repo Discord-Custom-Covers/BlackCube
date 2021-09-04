@@ -15,10 +15,7 @@ module.exports = {
                 .setRequired(true))
         .addStringOption(option =>
             option.setName('position')
-                .setDescription('The position of your image'))
-        .addSubcommand(subcommand =>
-            subcommand.setName('remove')
-                .setDescription('remove your current background')),
+                .setDescription('The position of your image')),
 	async execute(interaction) { // Handle interaction from dispatch
         const { user } = interaction
 
