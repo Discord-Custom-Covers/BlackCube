@@ -3,13 +3,6 @@ FROM node:16.8-alpine
 
 RUN apk add --no-cache ca-certificates mailcap
 
-COPY package*.json ./
-RUN npm install
-RUN npx prisma migrate --name users
-RUN node src/utils/build-commands.js
-COPY . .
-EXPOSE 8080
-
 RUN set -eux; \
 	mkdir -p \
 		/config/caddy \
@@ -64,7 +57,17 @@ LABEL org.opencontainers.image.source="https://github.com/caddyserver/caddy-dock
 EXPOSE 80
 EXPOSE 443
 EXPOSE 2019
+EXPOSE 8080
+
+COPY package*.json ./
+
+COPY . /srv
 
 WORKDIR /srv
 
-CMD ["./src/utils/run.bat"]
+RUN npm install
+RUN npx prisma migrate dev --name users
+RUN node src/utils/build-commands.js
+
+
+CMD ./run.sh
