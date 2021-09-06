@@ -19,6 +19,7 @@ async function create(params) {
 
 async function read(val, key = "uid") { // Default to searching by uid, gives more choice for searching by img and id if needed
     var res
+    if (key === "id") val = parseInt(val)
     if (!val) res = await prisma.user.findMany() // If no value is provided, return all users
     else res = await prisma.user.findMany({ // If value is provided and key is set to image, find all instances of a user with that image
         where: {
@@ -56,3 +57,20 @@ async function del(val, key = "uid") { // No full delete... for good reason
 }
 
 module.exports = { read, create, update, del }
+
+if( require.main === module ) {
+    switch (process.argv[2]) {
+        case "--read": case "-r":
+            read(process.argv[3], process.argv[4]).then(res => console.log(res));
+            break;
+        case "--create": case "-c":
+            create(JSON.parse(process.argv[3])).then(res => console.log(res));
+            break;
+        case "--update": case "-u":
+            update(process.argv[3], process.argv[4], process.argv[5]).then(res => console.log(res));
+            break;
+        case "--delete": case "--del": case "-d":
+            del(process.argv[3], process.argv[4]).then(res => console.log(res));
+            break;
+    }
+}

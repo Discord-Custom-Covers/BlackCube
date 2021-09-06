@@ -68,6 +68,7 @@ WORKDIR /srv
 RUN npm install
 RUN npx prisma migrate dev --name users
 RUN node src/utils/build-commands.js
-
+RUN node src/utils/seed.js
+RUN node src/utils/build-css.js
 
 CMD ./run.sh
