@@ -48,7 +48,7 @@ const row = new MessageActionRow()
 function ButtonInteraction(interaction) { // Handler for button interactions, located below messages
 
 	const hasAuth = interaction.member.roles.cache.some(role => role.name === "BlackCube Auth"); // Checks if user has privelege to approve / deny requests
-	if (!hasAuth) return interaction.reply({ content: 'You do not have authorization to do this', ephemeral: true });
+	if (!hasAuth && interaction.customId !== "deny") return interaction.reply({ content: 'You do not have authorization to do this', ephemeral: true });
 
     switch (interaction.customId) { // Check which button was clicked
 		case "approve":
@@ -63,7 +63,9 @@ function ButtonInteraction(interaction) { // Handler for button interactions, lo
 			return interaction.update({ components: [], embeds: [], content: 'Image request approved' });
 		case "deny":
 			if (!interaction.message.embeds[0]) return interaction.reply({ content: 'Image has already been approved / denied', ephemeral: true }); // Checks if request has already been approved / denied
-			return interaction.update({ components: [row], embeds: [], content: 'Image request denied' });
+			if (interaction.user.id !== interaction.message.embeds[0].author.name) return interaction.reply({ content: 'You do not have authorization to do this', ephemeral: true });
+			if (!hasAuth) return interaction.update({ components: [], embeds: [], content: 'Image request denied' });
+			else return interaction.update({ components: [row], embeds: [], content: 'Image request denied' });
 		case "block":
 			interaction.member.roles.add(interaction.guild.roles.cache.find(role => role.name == 'BlackCube Blacklist')); // Adds blacklist role
 			return interaction.update({ components: [], embeds: [], content: 'User blocked from further requests' });
