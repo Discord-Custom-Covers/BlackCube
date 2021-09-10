@@ -4,6 +4,8 @@ services:
     node-app:
         container_name: node-app
         restart: unless-stopped
+        volumes:
+        - database:/prisma
         environment: 
             - NODE_ENV=production
         build:
@@ -24,5 +26,6 @@ services:
         - caddy_config:/config
 
 volumes:
+  database:
   caddy_data:
   caddy_config:
