@@ -30,7 +30,7 @@ function runCompiler(callback) {
         });
 
         triggered = false // Unlock the function
-    }, 300000); // 5 minute timeout in ms
+    }, 300000); // 5 minute timeout in ms (300000)
 }
 
 const row = new MessageActionRow()

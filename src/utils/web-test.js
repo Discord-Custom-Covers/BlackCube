@@ -2,17 +2,17 @@ const cliProgress = require('cli-progress');
 const fetch = require("node-fetch");
 const util = require('util');
 
-const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
-
 if( require.main === module ) {
     (async () => {
+        // process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0
+        const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
         let errCount = 0
         const errData = new Map
         const max = process.argv[2] ? parseInt(process.argv[2]) : 1;
         console.log("Starting load test...")
         bar.start(max, 0);
         for (let i = 0; i < max; i++) {
-            let res = await fetch("http://localhost:3000/").catch(err => {console.log(err)})
+            let res = await fetch("http://localhost/").catch(err => {console.log(err)})
             if (res.status !== 200) {
                 if (process.argv[3] === "--verbose" || process.argv[3] === "-v") {
                     const errStatus = errData.get(res.status);

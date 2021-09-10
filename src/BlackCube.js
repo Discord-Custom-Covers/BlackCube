@@ -1,18 +1,20 @@
-const path = require('path')
+const path = require('path');
 const { token } = require('./config.json'); // Imports token, and client Id
 const commandList = require('./commands/commands.json'); // Imports list of current commands
 const { Client, Collection, Intents } = require('discord.js'); // Main discord.js import
 const { ButtonInteraction, CommandInteraction } = require('./handlers/Interactions.js') // Imports handlers for interaction types
 
 // Create client instance and set the intents and status
-const client = new Client({ intents: [Intents.FLAGS.GUILDS], permission: [Intents.FLAGS.MANAGE_ROLES], presence: {
-	status: 'online',
-	afk: false,
-	activities: [{
-		name: '/bg',
-		type: 'LISTENING',
-	}],
-} });
+const client = new Client({
+	intents: [Intents.FLAGS.GUILDS], permission: [Intents.FLAGS.MANAGE_ROLES], presence: {
+		status: 'online',
+		afk: false,
+		activities: [{
+			name: '/bg',
+			type: 'LISTENING',
+		}],
+	}
+});
 
 // Discord.js's fancy version of maps
 client.commands = new Collection();

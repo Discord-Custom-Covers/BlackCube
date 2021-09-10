@@ -1,0 +1,12 @@
+{
+    "apps": [
+      {
+        "name": "BlackCube",
+        "script": "./src/BlackCube.js"
+      },
+      {
+        "name": "CaddyServer",
+        "script": "./src/CaddyServer.js"
+      }
+    ]
+  }

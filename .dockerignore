@@ -1,6 +1,6 @@
 node_modules
 npm-debug.log
-src/styles/
+src/styles/db.css
 src/commands/commands.json
 prisma/database/
 prisma/migrations/
