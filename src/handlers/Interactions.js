@@ -47,7 +47,7 @@ const row = new MessageActionRow()
 
 function ButtonInteraction(interaction) { // Handler for button interactions, located below messages
 
-	const hasAuth = interaction.member.roles.cache.some(role => role.name === "BlackCube Auth"); // Checks if user has privelege to approve / deny requests
+	const hasAuth = interaction.member.roles.cache.some(role => role.name === "beta"); // Checks if user has privelege to approve / deny requests (BlackCube Auth)
 	if (!hasAuth && interaction.customId !== "deny") return interaction.reply({ content: 'You do not have authorization to do this', ephemeral: true });
 
     switch (interaction.customId) { // Check which button was clicked
@@ -79,7 +79,7 @@ function ButtonInteraction(interaction) { // Handler for button interactions, lo
 async function CommandInteraction(client, interaction) { // Handler for / commands
 	const bgChannel = interaction.guild.channels.cache.find(channel => channel.name === "background-requests").id; // Gets id of background-requests channel from name search
 
-	if (interaction.channel.name !== "background-requests") return interaction.reply({ content: `This command must be run in <#${bgChannel}>`, ephemeral: true });
+	// if (interaction.channel.name !== "background-requests") return interaction.reply({ content: `This command must be run in <#${bgChannel}>`, ephemeral: true });
 
 	const command = client.commands.get(interaction.commandName); // Get / command
 

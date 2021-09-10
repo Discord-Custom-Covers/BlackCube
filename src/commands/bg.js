@@ -62,6 +62,9 @@ module.exports = {
                     .setStyle('DANGER'),
             );
 
-		await interaction.reply({embeds: [embed], components: [row]});
+        const logChannel = interaction.guild.channels.cache.find(channel => channel.name === "beta-bg-request-log").id;
+        const channel = interaction.guild.channels.cache.get(logChannel);
+		await interaction.reply({ content: `Your background request has been created and can be viewed in <#${logChannel}>`, ephemeral: true })
+        await channel.send({embeds: [embed], components: [row]});
 	},
 };
