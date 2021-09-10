@@ -47,7 +47,7 @@ const row = new MessageActionRow()
 
 function ButtonInteraction(interaction) { // Handler for button interactions, located below messages
 
-	const hasAuth = interaction.member.roles.cache.some(role => role.name === "beta"); // Checks if user has privelege to approve / deny requests (BlackCube Auth)
+	const hasAuth = interaction.member.roles.cache.some(role => role.name === "BlackCube Auth"); // Checks if user has privelege to approve / deny requests (BlackCube Auth)
 	if (!hasAuth && interaction.customId !== "deny") return interaction.reply({ content: 'You do not have authorization to do this', ephemeral: true });
 
     switch (interaction.customId) { // Check which button was clicked
