@@ -7,7 +7,7 @@ let triggered = false
 
 function runCompiler(callback) {
 
-    if (triggered) return // Returnds if locked
+    if (triggered) return // Returns if locked
 
     triggered = true // Lock function for 5 minutes
 
@@ -79,7 +79,7 @@ function ButtonInteraction(interaction) { // Handler for button interactions, lo
 async function CommandInteraction(client, interaction) { // Handler for / commands
 	const bgChannel = interaction.guild.channels.cache.find(channel => channel.name === "background-requests").id; // Gets id of background-requests channel from name search
 
-	// if (interaction.channel.name !== "background-requests") return interaction.reply({ content: `This command must be run in <#${bgChannel}>`, ephemeral: true });
+	if (interaction.channel.name !== "background-requests") return interaction.reply({ content: `This command must be run in <#${bgChannel}>`, ephemeral: true });
 
 	const command = client.commands.get(interaction.commandName); // Get / command
 
