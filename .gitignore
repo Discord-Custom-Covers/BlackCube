@@ -5,3 +5,4 @@ src/config.json
 src/commands/commands.json
 prisma/database/
 prisma/migrations/
+Caddyfile

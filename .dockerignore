@@ -5,3 +5,4 @@ src/commands/commands.json
 prisma/database/
 prisma/migrations/
 .gitignore
+Caddyfile.example
