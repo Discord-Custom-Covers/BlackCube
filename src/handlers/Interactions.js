@@ -63,7 +63,7 @@ function ButtonInteraction(interaction) { // Handler for button interactions, lo
 			return interaction.update({ components: [], embeds: [], content: 'Image request approved' });
 		case "deny":
 			if (!interaction.message.embeds[0]) return interaction.reply({ content: 'Image has already been approved / denied', ephemeral: true }); // Checks if request has already been approved / denied
-			if (interaction.user.id !== interaction.message.embeds[0].author.name) return interaction.reply({ content: 'You do not have authorization to do this', ephemeral: true });
+			if (interaction.user.id !== interaction.message.embeds[0].author.name && !hasAuth) return interaction.reply({ content: 'You do not have authorization to do this', ephemeral: true });
 			if (!hasAuth) return interaction.update({ components: [], embeds: [], content: 'Image request denied' });
 			else return interaction.update({ components: [row], embeds: [], content: 'Image request denied' });
 		case "block":
