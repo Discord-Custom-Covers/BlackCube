@@ -60,17 +60,17 @@ function ButtonInteraction(interaction) { // Handler for button interactions, lo
 			else pos = "none"
 			CRUD.create({ uid: interaction.message.embeds[0].author.name, img: interaction.message.embeds[0].thumbnail.url, orientation: pos })
 			.then(() => {runCompiler(err => {if (err) throw err})}); // Trigger compiler
-			return interaction.update({ components: [], embeds: [], content: 'Image request approved' });
+			return interaction.update({ components: [], content: 'Image request approved' });
 		case "deny":
 			if (!interaction.message.embeds[0]) return interaction.reply({ content: 'Image has already been approved / denied', ephemeral: true }); // Checks if request has already been approved / denied
 			if (interaction.user.id !== interaction.message.embeds[0].author.name && !hasAuth) return interaction.reply({ content: 'You do not have authorization to do this', ephemeral: true });
-			if (!hasAuth) return interaction.update({ components: [], embeds: [], content: 'Image request denied' });
-			else return interaction.update({ components: [row], embeds: [], content: 'Image request denied' });
+			if (!hasAuth) return interaction.update({ components: [], content: 'Image request denied' });
+			else return interaction.update({ components: [row], content: 'Image request denied' });
 		case "block":
 			interaction.member.roles.add(interaction.guild.roles.cache.find(role => role.name == 'BlackCube Blacklist')); // Adds blacklist role
-			return interaction.update({ components: [], embeds: [], content: 'User blocked from further requests' });
+			return interaction.update({ components: [], content: 'User blocked from further requests' });
 		case "dismiss":
-			return interaction.update({ components: [], embeds: [], content: 'Image request denied' });
+			return interaction.update({ components: [], content: 'Image request denied' });
 		default: // Runs if somehow a different buttonId was given
 			return interaction.reply({ content: 'Invalid button Id', ephemeral: true });
 	}
