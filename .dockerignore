@@ -1,6 +1,7 @@
 node_modules
 npm-debug.log
 src/styles/db.css
-src/commands/commands.json
+# src/commands/commands.json
 .gitignore
 Caddyfile.example
+docker-compose.yml

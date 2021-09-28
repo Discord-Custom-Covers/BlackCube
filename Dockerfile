@@ -16,4 +16,4 @@ RUN rm -rf /src/node_modules && cp -a /tmp/node_modules /src/
 WORKDIR /src
 
 # Run the built application
-CMD node src/utils/build-commands.js && npx pm2-runtime start pm2.json
+CMD npx pm2-runtime start pm2.json

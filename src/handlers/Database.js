@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient
-const uri = 'mongodb://localhost:27017/'
+const uri = `mongodb://${process.env.mongoIp}:27017/`
 const client = new MongoClient(uri)
 const connection = client.connect()
 
