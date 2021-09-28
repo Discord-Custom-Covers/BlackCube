@@ -1,5 +1,4 @@
 const path = require('path');
-const { token } = require('./config.json'); // Imports token, and client Id
 const commandList = require('./commands/commands.json'); // Imports list of current commands
 const { Client, Collection, Intents } = require('discord.js'); // Main discord.js import
 const { ButtonInteraction, CommandInteraction } = require('./handlers/Interactions.js') // Imports handlers for interaction types
@@ -39,4 +38,4 @@ client.on('interactionCreate', async interaction => {
 });
 
 // Login to the Discord Api with the token
-client.login(token);
+client.login(process.env.token);

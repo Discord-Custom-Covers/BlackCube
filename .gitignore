@@ -1,8 +1,6 @@
 node_modules
 npm-debug.log
-src/styles/
+src/styles/db.css
 src/config.json
 src/commands/commands.json
-prisma/database/
-prisma/migrations/
 Caddyfile

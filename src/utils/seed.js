@@ -1,17 +1,8 @@
-const { PrismaClient } = require("@prisma/client");
-const cliProgress = require('cli-progress');
-const users = require("./oldData.json");
+const CRUD = require("../handlers/Database");
+const oldData = require("./oldData.json");
 
-const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
-bar.start(Object.keys(users).length, 0);
+const dat = Object.entries(oldData).map(user => {
+    return { uid: user[0], img: user[1].background, orientation: user[1].orientation ? user[1].orientation : "none" }
+})
 
-const prisma = new PrismaClient();
-
-(async () => {
-    for (let [key, value] of Object.entries(users)) {
-        await prisma.user.create({data: {uid: key, img: value.background, orientation: value.orientation ?? "none"}})
-        bar.increment()
-    }
-    await prisma.$disconnect();
-    bar.stop();
-})();
+CRUD.create(dat).then(() => process.exit(1))

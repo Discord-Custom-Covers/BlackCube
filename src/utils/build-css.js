@@ -18,6 +18,7 @@ require("../handlers/Database.js").read().then(data => {
     }).join("");
 
     require("fs").writeFileSync(require("path").join(__dirname, "..", "styles", "db.css"), ".userPopout-xaxa6l{--user-popout-position:center}" + css);
+    process.exit(1);
 })
 .catch(e => {
     console.error(e)

@@ -1,5 +1,5 @@
 const cliProgress = require('cli-progress');
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
 const util = require('util');
 
 if( require.main === module ) {

@@ -4,12 +4,26 @@ services:
     node-app:
         container_name: node-app
         restart: unless-stopped
-        volumes:
-        - database:/prisma
         environment: 
             - NODE_ENV=production
-        build:
-            context: ./
+            - token=
+            - guildId=
+            - clientId=
+        image: p0rtl/blackcube
+
+    mongo:
+        image: mongo
+        container_name: mongo-db
+        environment:
+            - MONGO_INITDB_DATABASE=usrbg
+            - MONGO_INITDB_USERNAMEE=root
+            - MONGO_INITDB_ROOT_PASSWORD=
+        volumes:
+            - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+            - ./mongo-volume:/data/db
+        ports:
+            - '27017-27019:27017-27019'
+        restart: always
 
     # Run the caddy server        
     caddy:
@@ -26,6 +40,5 @@ services:
         - caddy_config:/config
 
 volumes:
-  database:
   caddy_data:
   caddy_config:

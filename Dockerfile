@@ -15,11 +15,5 @@ RUN rm -rf /src/node_modules && cp -a /tmp/node_modules /src/
 
 WORKDIR /src
 
-# Build the appliction
-RUN npx prisma migrate dev --name users
-RUN node src/utils/build-commands.js
-RUN node src/utils/seed.js
-RUN node src/utils/build-css.js
-
 # Run the built application
-CMD npx pm2-runtime start pm2.json
+CMD node src/utils/build-commands.js && npx pm2-runtime start pm2.json

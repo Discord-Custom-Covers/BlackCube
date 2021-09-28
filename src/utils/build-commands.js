@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path')
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { clientId, token } = require('../config.json'); // Imports token, and client Id
 
 // Get list of files in the commands dir
 const commandFiles = fs.readdirSync(path.join(__dirname, "..", "commands")).filter(file => file.endsWith('.js'));
@@ -17,13 +16,13 @@ const commands = commandFiles.map((file) => {
 
 // Write json to storage for use during bot runtime
 fs.writeFileSync(path.join(__dirname, "..", "commands", "commands.json"), JSON.stringify(commands))
-const rest = new REST({ version: '9' }).setToken(token);
+const rest = new REST({ version: '9' }).setToken(process.env.token);
 
 // Make auth request to Discord
 (async () => {
 	try {
 		await rest.put(
-			Routes.applicationCommands(clientId),
+			Routes.applicationCommands(process.env.clientId),
 			{ body: commands },
 		);
 
