@@ -1,37 +1,5 @@
 const { MessageActionRow, MessageButton } = require('discord.js');
 const CRUD = require("./Database.js");
-const childProcess = require('child_process');
-const path = require("path")
-
-let triggered = false 
-
-function runCompiler(callback) {
-
-    if (triggered) return // Returns if locked
-
-    triggered = true // Lock function for 5 minutes
-
-    setTimeout(() => { // Actual compile
-        let invoked = false;
-
-        var process = childProcess.fork(path.join(__dirname, "..", "utils", "build-css.js")); // run build-css.js
-
-        process.on('error', err => {
-            if (invoked) return;
-            invoked = true;
-            callback(err);
-        });
-
-        process.on('exit', code => {
-            if (invoked) return;
-            invoked = true;
-            var err = code === 0 ? null : new Error('exit code ' + code);
-            callback(err);
-        });
-
-        triggered = false // Unlock the function
-    }, 300000); // 5 minute timeout in ms (300000)
-}
 
 const row = new MessageActionRow()
 .addComponents(
@@ -59,7 +27,6 @@ function ButtonInteraction(interaction) { // Handler for button interactions, lo
 			else if (title && title.includes("right")) pos = "right"
 			else pos = "none"
 			CRUD.create({ uid: interaction.message.embeds[0].author.name, img: interaction.message.embeds[0].thumbnail.url, orientation: pos })
-			.then(() => {runCompiler(err => {if (err) throw err})}); // Trigger compiler
 			return interaction.update({ components: [], content: 'Image request approved' });
 		case "deny":
 			if (!interaction.message.embeds[0]) return interaction.reply({ content: 'Image has already been approved / denied', ephemeral: true }); // Checks if request has already been approved / denied

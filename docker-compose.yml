@@ -1,8 +1,7 @@
 version: '3.7'
 services:
-    # Run the node application
-    node-app:
-        container_name: node-app
+    blackcube:
+        container_name: blackcube
         restart: unless-stopped
         environment:
             - NODE_ENV=production
@@ -11,31 +10,3 @@ services:
             - clientId=
             - mongoIp=
         image: p0rtl/blackcube
-        volumes:
-            - ./Caddyfile:./Caddyfile
-
-    mongo:
-        container_name: container-mongodb
-        image: mongo
-        restart: always
-        ports:
-            - 27017:27017
-        volumes:
-            - ./mongo-volume:/data/db
-
-    caddy:
-        image: caddy/caddy:2.2.1-alpine
-        container_name: caddy-service
-        restart: unless-stopped
-        ports:
-            - "80:80"
-            - "443:443"
-        volumes:            
-        - ./Caddyfile:/etc/caddy/Caddyfile
-        - ./site:/srv
-        - caddy_data:/data
-        - caddy_config:/config
-
-volumes:
-  caddy_data:
-  caddy_config:

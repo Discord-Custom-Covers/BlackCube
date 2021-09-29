@@ -37,7 +37,5 @@
     * The selector "key" (if not set defaults to uid) - `string` - read & delete (3), update (4)
     * The params for a user - `{uid: 'string', img: 'string', orientation: 'string'}` - create & update (2)
 ## Deployment
-1. Update Caddyfile to preference
-2. Create a `config.json` file in the `src` dir
-3. Put your `clientId` and `token` in the config
-4. Dockerize and run by running `./deploy.sh`
+1. Copy `docker-compose.yml` and fill in the env variables
+2. Run with docker-compose

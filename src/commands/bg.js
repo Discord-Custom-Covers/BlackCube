@@ -4,7 +4,6 @@ const fetch = require('node-fetch');
 
 const urlParams = ["images.unsplash.com", "i.imgur.com", "cdn.discordapp.com", "media.discordapp.net"] // Whitelisted Urls
 
-
 module.exports = {
 	data: new SlashCommandBuilder() // Actual command, referenced for use in other files
 		.setName('bg')

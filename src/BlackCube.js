@@ -3,23 +3,6 @@ const path = require('path');
 if (process.env.generate === true) {
 	const childProcess = require('child_process');
 
-	let seeded = false;
-	
-	var seed = childProcess.fork(path.join(__dirname, "..", "utils", "seed.js")); // run build-css.js
-	
-	seed.on('error', err => {
-		if (seeded) return;
-		seeded = true;
-		callback(err);
-	});
-	
-	seed.on('exit', code => {
-		if (seeded) return;
-		seeded = true;
-		var err = code === 0 ? null : new Error('exit code ' + code);
-		callback(err);
-	});
-
 	var build = childProcess.fork(path.join(__dirname, "..", "utils", "build-commands.js")); // run build-css.js
 	
 	build.on('error', err => {

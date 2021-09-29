@@ -12,7 +12,7 @@ if( require.main === module ) {
         console.log("Starting load test...")
         bar.start(max, 0);
         for (let i = 0; i < max; i++) {
-            let res = await fetch("https://usrbg.cumcord.com/").catch(err => {console.log(err)})
+            let res = await fetch("https://black-cube-web.vercel.app/api/css").catch(err => {console.log(err)})
             if (res.status !== 200) {
                 if (process.argv[3] === "--verbose" || process.argv[3] === "-v") {
                     const errStatus = errData.get(res.status);
