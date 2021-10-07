@@ -1,5 +1,16 @@
 FROM node:16.8-alpine
 
+ARG BOT_TOKEN
+ENV token $BOT_TOKEN
+
+ARG CLIENT_ID
+ENV clientId $CLIENT_ID
+
+ARG MONGODB_URI
+ENV mongoIp $MONGODB_URI
+
+ENV NODE_ENV production
+
 ADD package.json /tmp/package.json
 
 # Remove the old build directory
