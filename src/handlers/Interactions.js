@@ -34,7 +34,9 @@ function ButtonInteraction(interaction) { // Handler for button interactions, lo
 			if (!hasAuth) return interaction.update({ components: [], content: 'Image request denied' });
 			else return interaction.update({ components: [row], content: 'Image request denied' });
 		case "block":
-			interaction.guild.members.fetch(interaction.message.embeds[0].author.name).roles.add(interaction.guild.roles.cache.find(role => role.name == 'BlackCube Blacklist')); // Adds blacklist role
+			interaction.guild.members.fetch(interaction.message.embeds[0].author.name).then(member => {
+				member.roles.add(interaction.guild.roles.cache.find(role => role.name == 'BlackCube Blacklist')); // Adds blacklist role
+			});
 			return interaction.update({ components: [], content: 'User blocked from further requests' });
 		case "dismiss":
 			return interaction.update({ components: [], content: 'Image request denied' });
