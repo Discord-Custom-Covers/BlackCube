@@ -1,3 +1,5 @@
+## THIS BOT IS NO LONGER MAINTAINED - THE NEW BOT IS HOSTED [HERE](https://github.com/p0rtL6/oxide)
+
 # BlackCube - USRBG handler bot v2
 ## Server Setup (case sensitive)
 ### Roles
